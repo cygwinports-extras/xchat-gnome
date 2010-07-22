@@ -1,0 +1,10 @@
+inherit gnome2
+
+DESCRIPTION="GNOME frontend to Xchat IRC client"
+HOMEPAGE="http://live.gnome.org/Xchat-Gnome"
+
+PATCH_URI="
+	http://patch-tracker.debian.org/patch/series/dl/xchat-gnome/1:0.26.1-2/10_obey_nick_suffix.patch
+	http://patch-tracker.debian.org/patch/series/dl/xchat-gnome/1:0.26.1-2/11_topic_return.patch
+	http://patch-tracker.debian.org/patch/series/dl/xchat-gnome/1:0.26.1-2/50_serverlist_update.patch
+"

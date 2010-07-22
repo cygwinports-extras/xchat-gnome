@@ -1,0 +1,191 @@
+--- origsrc/xchat-gnome-0.26.1/plugins/autoaway/Makefile.am	2007-03-09 09:43:19.000000000 -0600
++++ src/xchat-gnome-0.26.1/plugins/autoaway/Makefile.am	2010-07-21 22:07:22.045539800 -0500
+@@ -23,6 +23,7 @@ autoaway_la_CFLAGS = \
+ autoaway_la_LDFLAGS =	\
+ 	-avoid-version	\
+ 	-module		\
++	-no-undefined	\
+ 	$(AM_LDFLAGS)
+ 
+ autoaway_la_LIBADD =	\
+--- origsrc/xchat-gnome-0.26.1/plugins/net-monitor/Makefile.am	2007-03-09 09:42:51.000000000 -0600
++++ src/xchat-gnome-0.26.1/plugins/net-monitor/Makefile.am	2010-07-21 22:07:25.949763100 -0500
+@@ -15,6 +15,7 @@ netmonitor_la_CFLAGS = \
+ netmonitor_la_LDFLAGS = \
+ 	-avoid-version 		\
+ 	-module			\
++	-no-undefined	\
+ 	$(AM_LDFLAGS)
+ 
+ netmonitor_la_LIBADD = $(DBUS_LIBS)
+--- origsrc/xchat-gnome-0.26.1/plugins/notification/Makefile.am	2007-03-09 09:42:51.000000000 -0600
++++ src/xchat-gnome-0.26.1/plugins/notification/Makefile.am	2010-07-21 22:07:32.158118200 -0500
+@@ -22,6 +22,7 @@ notification_la_CFLAGS = \
+ notification_la_LDFLAGS = \
+ 	-avoid-version	\
+ 	-module		\
++	-no-undefined	\
+ 	$(AM_LDFLAGS)
+ 
+ xchat_gnome_DATA = 			\
+--- origsrc/xchat-gnome-0.26.1/plugins/notify-osd/Makefile.am	2007-03-09 09:42:51.000000000 -0600
++++ src/xchat-gnome-0.26.1/plugins/notify-osd/Makefile.am	2010-07-21 22:07:36.541368900 -0500
+@@ -17,6 +17,7 @@ notifyosd_la_CFLAGS = \
+ notifyosd_la_LDFLAGS = \
+ 	-avoid-version 	\
+ 	-module		\
++	-no-undefined	\
+ 	$(AM_LDFLAGS)
+ 
+ notifyosd_la_LIBADD = $(LIBNOTIFY_LIBS)
+--- origsrc/xchat-gnome-0.26.1/plugins/perl/Makefile.am	2007-03-09 09:42:50.000000000 -0600
++++ src/xchat-gnome-0.26.1/plugins/perl/Makefile.am	2010-07-21 22:07:40.597600900 -0500
+@@ -15,6 +15,7 @@ perl_la_CFLAGS = \
+ perl_la_LDFLAGS = \
+ 	-avoid-version		\
+  	-module			\
++	-no-undefined	\
+ 	$(PERL_LDFLAGS)		\
+ 	$(AM_LDFLAGS)
+ 
+--- origsrc/xchat-gnome-0.26.1/plugins/python/Makefile.am	2008-09-07 08:18:27.000000000 -0500
++++ src/xchat-gnome-0.26.1/plugins/python/Makefile.am	2010-07-21 22:07:44.261810500 -0500
+@@ -16,6 +16,7 @@ python_la_CFLAGS = \
+ python_la_LDFLAGS =		\
+ 	-avoid-version		\
+ 	-module			\
++	-no-undefined	\
+ 	$(PYTHON_LIB_LOC)	\
+ 	$(AM_LDFLAGS)
+ 
+--- origsrc/xchat-gnome-0.26.1/plugins/sound-notification/Makefile.am	2008-09-07 08:18:27.000000000 -0500
++++ src/xchat-gnome-0.26.1/plugins/sound-notification/Makefile.am	2010-07-21 22:07:47.910019200 -0500
+@@ -18,6 +18,7 @@ soundnotification_la_CFLAGS = \
+ soundnotification_la_LDFLAGS = \
+ 	-avoid-version 	\
+ 	-module		\
++	-no-undefined	\
+ 	$(AM_LDFLAGS)
+ 
+ soundnotification_la_LIBADD = $(LIBCANBERRAGTK_LIBS)
+--- origsrc/xchat-gnome-0.26.1/plugins/tcl/Makefile.am	2007-03-09 09:42:51.000000000 -0600
++++ src/xchat-gnome-0.26.1/plugins/tcl/Makefile.am	2010-07-21 22:07:51.158205000 -0500
+@@ -18,6 +18,7 @@ tcl_la_CFLAGS = \
+ tcl_la_LDFLAGS = \
+ 	-avoid-version		\
+  	-module			\
++	-no-undefined	\
+  	$(AM_LDFLAGS)
+ 
+ tcl_la_LIBADD = $(TCL_LIBS)
+--- origsrc/xchat-gnome-0.26.1/plugins/url_scraper/Makefile.am	2007-03-09 09:42:50.000000000 -0600
++++ src/xchat-gnome-0.26.1/plugins/url_scraper/Makefile.am	2010-07-21 22:07:54.614402700 -0500
+@@ -14,6 +14,7 @@ urlscraper_la_CFLAGS = \
+ urlscraper_la_LDFLAGS = \
+ 	-avoid-version 	\
+ 	-module		\
++	-no-undefined	\
+ 	$(AM_LDFLAGS)
+ 
+ schemadir	= $(GCONF_SCHEMA_FILE_DIR)
+--- origsrc/xchat-gnome-0.26.1/plugins/xchat-plugin.h	2009-03-15 09:08:06.000000000 -0500
++++ src/xchat-gnome-0.26.1/plugins/xchat-plugin.h	2010-07-21 22:06:51.684803300 -0500
+@@ -296,7 +296,7 @@ void
+ xchat_free (xchat_plugin *ph,
+ 	    void *ptr);
+ 
+-#if !defined(PLUGIN_C) && defined(WIN32)
++#if !defined(PLUGIN_C) && (defined(WIN32) || defined(__CYGWIN__))
+ #ifndef XCHAT_PLUGIN_HANDLE
+ #define XCHAT_PLUGIN_HANDLE (ph)
+ #endif
+--- origsrc/xchat-gnome-0.26.1/src/common/outbound.c	2008-09-07 08:18:45.000000000 -0500
++++ src/xchat-gnome-0.26.1/src/common/outbound.c	2010-07-21 22:11:17.358999000 -0500
+@@ -2475,7 +2475,7 @@ cmd_load (struct session *sess, char *tb
+ 
+ #ifdef USE_PLUGIN
+ 	len = strlen (word[2]);
+-#ifdef WIN32
++#if defined(WIN32) || defined(__CYGWIN__)
+ 	if (len > 4 && strcasecmp (".dll", word[2] + len - 4) == 0)
+ #else
+ #if defined(__hpux)
+@@ -3218,7 +3218,7 @@ cmd_unload (struct session *sess, char *
+ 	int len, by_file = FALSE;
+ 
+ 	len = strlen (word[2]);
+-#ifdef WIN32
++#if defined(WIN32) || defined(__CYGWIN__)
+ 	if (len > 4 && strcasecmp (word[2] + len - 4, ".dll") == 0)
+ #else
+ #if defined(__hpux)
+--- origsrc/xchat-gnome-0.26.1/src/common/plugin.c	2009-03-15 09:08:06.000000000 -0500
++++ src/xchat-gnome-0.26.1/src/common/plugin.c	2010-07-21 22:11:48.678790400 -0500
+@@ -436,8 +436,10 @@ plugin_auto_load (session *sess)
+ #ifdef WIN32
+ 	for_files ("./plugins", "*.dll", plugin_auto_load_cb);
+ 	for_files (get_xdir_fs (), "*.dll", plugin_auto_load_cb);
+-#else
+-#if defined(__hpux)
++#elif defined(__CYGWIN__)
++	for_files (XCHATLIBDIR"/plugins", "*.dll", plugin_auto_load_cb);
++	for_files (get_xdir_fs (), "*.dll", plugin_auto_load_cb);
++#elif defined(__hpux)
+ 	for_files (XCHATLIBDIR"/plugins", "*.sl", plugin_auto_load_cb);
+ 	for_files (get_xdir_fs (), "*.sl", plugin_auto_load_cb);
+ #else
+--- origsrc/xchat-gnome-0.26.1/src/fe-gnome/mmx_cmod.S	2007-03-09 09:42:57.000000000 -0600
++++ src/xchat-gnome-0.26.1/src/fe-gnome/mmx_cmod.S	2010-07-21 22:08:57.793016300 -0500
+@@ -35,7 +35,7 @@
+ #define gm	28(%ebp)
+ #define bm	32(%ebp)
+ 
+-#ifdef UNDERSCORE_SYMBOLS /* need this to link with msvc */
++#if defined(WIN32) || defined(__CYGWIN__)
+ #define SHADE_XIMAGE_15 _shade_ximage_15_mmx
+ #define SHADE_XIMAGE_16 _shade_ximage_16_mmx
+ #define SHADE_XIMAGE_32 _shade_ximage_32_mmx
+@@ -522,7 +522,7 @@ HAVE_MMX:
+ 	popl	%ebx
+ 	ret
+ 
+-#if defined(__GNUC__) && !defined(_WIN32)
++#if defined(__GNUC__) && !defined(_WIN32) && !defined(__CYGWIN__)
+ .section .note.GNU-stack, "", @progbits
+ .previous
+ #endif
+--- origsrc/xchat-gnome-0.26.1/src/fe-gnome/plugins.c	2007-03-09 09:42:57.000000000 -0600
++++ src/xchat-gnome-0.26.1/src/fe-gnome/plugins.c	2010-07-21 22:10:37.155699500 -0500
+@@ -90,7 +90,7 @@ int
+ unload_plugin (char *filename)
+ {
+ 	int len = strlen (filename);
+-	if (len > 3 && strcasecmp (filename + len - 3, ".so") == 0) {
++	if (len > (strlen ("."G_MODULE_SUFFIX)) && strcasecmp (filename + len - strlen ("."G_MODULE_SUFFIX), "."G_MODULE_SUFFIX) == 0) {
+ 		/* Plugin. */
+ 		return plugin_kill (filename, 1);
+ 	} else {
+@@ -138,7 +138,7 @@ load_plugin (session * sess, char *filen
+ 	if (g_slist_find_custom (loaded_plugins, filename, (GCompareFunc) strcmp))
+ 		return NULL;
+ 
+-	if (len > 3 && strcasecmp (filename + len - 3, ".so") == 0) {
++	if (len > (strlen ("."G_MODULE_SUFFIX)) && strcasecmp (filename + len - strlen ("."G_MODULE_SUFFIX), "."G_MODULE_SUFFIX) == 0) {
+ 		if (!(autoload && script)) {
+ 			/* Plugin */
+ 			handle = g_module_open (filename, 0);
+--- origsrc/xchat-gnome-0.26.1/src/fe-gnome/preferences-page-plugins.c	2007-07-24 04:24:39.000000000 -0500
++++ src/xchat-gnome-0.26.1/src/fe-gnome/preferences-page-plugins.c	2010-07-21 22:13:06.993269700 -0500
+@@ -418,10 +418,12 @@ preferences_page_plugins_check_plugins (
+ 
+ 	homedir = g_get_home_dir ();
+ 	xchatdir = g_strdup_printf ("%s/.xchat2/plugins", homedir);
++	for_files (XCHATLIBDIR "/plugins", "*.dll", fe_plugin_add);
+ 	for_files (XCHATLIBDIR "/plugins", "*.so", fe_plugin_add);
+ 	for_files (XCHATLIBDIR "/plugins", "*.sl", fe_plugin_add);
+ 	for_files (XCHATLIBDIR "/plugins", "*.py", fe_plugin_add);
+ 	for_files (XCHATLIBDIR "/plugins", "*.pl", fe_plugin_add);
++	for_files (xchatdir, "*.dll", fe_plugin_add);
+ 	for_files (xchatdir, "*.so", fe_plugin_add);
+ 	for_files (xchatdir, "*.sl", fe_plugin_add);
+ 	for_files (xchatdir, "*.py", fe_plugin_add);
